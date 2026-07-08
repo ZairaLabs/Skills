@@ -1,0 +1,14 @@
+Copyright (c) 2026 Zaira Labs, LLC. All rights reserved.
+
+The building-for-agents skill and its contents (SKILL.md, the reference files,
+the scripts, and the documentation) are proprietary to Zaira Labs, LLC. Use is
+governed by the Zaira Labs Terms of Service: https://zairalabs.ai/terms
+
+You may install and run this skill with an AI agent for its intended purpose:
+reviewing and improving developer tools for agent-readiness. All other rights,
+including redistribution, modification, and the creation of derivative works,
+are reserved unless granted in writing or permitted by the Terms of Service.
+
+This skill produces guidance and code changes for your team to review. It is
+provided "as is", without warranty of any kind. You are responsible for
+reviewing and testing any changes before merging or deploying them.
