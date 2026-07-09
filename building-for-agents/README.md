@@ -41,4 +41,4 @@ This skill produces guidance and code changes for your team to review, not decis
 
 ## License
 
-Proprietary. Copyright 2026 Zaira Labs, LLC. All rights reserved. Use is governed by the [Zaira Labs Terms of Service](https://zairalabs.ai/terms); see [LICENSE](LICENSE).
+Apache License 2.0. Copyright 2026 Zaira Labs, LLC. The license governs copying, modification, and redistribution of these materials; see [LICENSE](LICENSE) and [NOTICE](NOTICE). It does not grant rights to the Zaira Labs trademarks, and outputs produced with this skill are not Zaira Scores, evaluations, or certifications. Reliance on the guidance, and use of Zaira Labs services, are governed by the [Zaira Labs Terms of Service](https://zairalabs.ai/terms).

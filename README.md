@@ -19,6 +19,8 @@ others).
 
 ## License
 
-Proprietary to Zaira Labs, LLC. Use is governed by the
-[Zaira Labs Terms of Service](https://zairalabs.ai/terms). See each skill's
-`LICENSE`.
+Each skill directory carries its own license; `building-for-agents` is
+licensed under the [Apache License 2.0](./building-for-agents/LICENSE).
+The Zaira Labs marks are not licensed, and reliance on the guidance and
+use of Zaira Labs services are governed by the
+[Zaira Labs Terms of Service](https://zairalabs.ai/terms).
