@@ -21,7 +21,7 @@ Criterion IDs reference the [Zaira Standard v0.9](https://zairalabs.ai/standard/
 - **Client Credentials grant** (OAuth 2.0) is the machine-to-machine standard. Client ID plus secret yields a token, with no browser anywhere.
 - **Device Flow** (OAuth 2.0) covers acting on behalf of a human. The agent surfaces a URL and code, the human approves once in their own browser, and the agent proceeds. One-time approval, not per-request interaction.
 
-For calibration: of 492 MCP servers examined in one survey, zero implemented authentication, and among tools that do, 53% rely on static secrets with no rotation. Having any documented non-interactive path already clears most of the field.
+For calibration: a July 2025 network scan found 492 MCP servers exposed to the internet with no authentication at all, and among open-source MCP servers that do implement auth, 53% rely on static secrets with no rotation. Having any documented non-interactive path already clears most of the field.
 
 **Trade-offs:** if your security model currently mandates interactive 2FA for everything, service accounts with non-interactive paths are the answer. That is a deliberate identity-model decision, not a weakening. Scope service credentials tightly (AU2) rather than resisting their existence. Teams that resist end up with humans pasting their personal session tokens into agents, which is strictly worse.
 
@@ -35,7 +35,7 @@ For calibration: of 492 MCP servers examined in one survey, zero implemented aut
 
 **What good looks like:** read/write separation at minimum. Per-resource scoped keys with helpful insufficient-permission errors in the middle. Per-resource, per-operation scoping with deny-by-default for destructive operations at the strong end.
 
-**How to get there:** the measured stakes: over-privileged agents show a 76% security incident rate versus 17% for properly scoped ones, yet 70% of organizations grant agents more access than the equivalent human. Ship read-only keys first. Most agent workloads are read-heavy, and a read-only key makes WO1's worst cases structurally impossible. Then per-resource scoping. And make the insufficient-permission error state which scope is required. That single detail converts a dead end into a precise "ask your human for X" handoff.
+**How to get there:** the stakes, per industry surveys: over-privileged agents show significantly higher security incident rates than properly scoped ones, yet a majority of organizations grant agents more access than the equivalent human. Ship read-only keys first. Most agent workloads are read-heavy, and a read-only key makes WO1's worst cases structurally impossible. Then per-resource scoping. And make the insufficient-permission error state which scope is required. That single detail converts a dead end into a precise "ask your human for X" handoff.
 
 **Trade-offs:** fine-grained permission systems are real product surface with real UX cost for the humans configuring them. Sensible defaults carry most of the value: agent-typed keys default to read-only, and destructive scopes are opt-in by name.
 
@@ -49,7 +49,7 @@ For calibration: of 492 MCP servers examined in one survey, zero implemented aut
 
 **What good looks like:** an API for key creation and rotation plus refresh tokens at minimum. Automatic rotation with zero-downtime overlap, per-key revocation, and expiry metadata in the middle. Brokered credentials, dual-secret rotation, and per-key audit trails at the strong end.
 
-**How to get there:** non-human identities outnumber human ones 144 to 1 in typical enterprises. "Regenerate key in dashboard" does not survive that ratio. The core set: key creation and rotation via API, overlap windows so rotation doesn't drop traffic (dual-secret: issue new, migrate, retire old), revocation per key rather than per account (one compromised agent shouldn't force rotating everything), and expiry metadata on the credential so agents refresh proactively instead of failing at expiry. Current guidance for agent tokens runs 5-15 minutes with automated refresh, a different world from multi-month human keys, and only livable with programmatic lifecycle support.
+**How to get there:** machine identities outnumber human ones 109 to 1 in enterprise environments, and nearly three quarters of them are AI agents. "Regenerate key in dashboard" does not survive that ratio. The core set: key creation and rotation via API, overlap windows so rotation doesn't drop traffic (dual-secret: issue new, migrate, retire old), revocation per key rather than per account (one compromised agent shouldn't force rotating everything), and expiry metadata on the credential so agents refresh proactively instead of failing at expiry. Current guidance for agent tokens runs 5-15 minutes with automated refresh, a different world from multi-month human keys, and only livable with programmatic lifecycle support.
 
 **Trade-offs:** short lifetimes without solid refresh mechanics just create outages. Sequence the refresh path before tightening lifetimes.
 

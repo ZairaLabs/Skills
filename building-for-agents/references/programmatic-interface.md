@@ -44,7 +44,7 @@ Criterion IDs reference the [Zaira Standard v0.9](https://zairalabs.ai/standard/
 
 **What good looks like:** 5-15 focused tools designed around user outcomes. Larger catalogs managed through dynamic discovery or deferred loading rather than exposed flat.
 
-**How to get there:** tool selection accuracy falls from roughly 90% at 1-30 tools to roughly 14% at 100+. The failed pattern is the intuitive one: mirror the REST API, one tool per endpoint. Block's CMS did this with 50 tools and got 31% agent success; redesigned around 8 outcome-oriented tools, success rose to 89%. Group by intent. One `manage_subscription` handling create, update, cancel, and status beats four siblings. For genuinely large catalogs, deferred loading (start small, fetch more on demand) improved accuracy from 49% to 74% while cutting context consumption 85%.
+**How to get there:** tool selection accuracy runs above 90% with fewer than 30 tools and deteriorates steadily past 100; in one production catalog of 584 tools, routing accuracy dropped 16 to 23 percentage points across frontier models. The failed pattern is the intuitive one: mirror the REST API, one tool per endpoint. Block's Linear integration did this with more than 30 tools, one per endpoint, and was rebuilt as two outcome-oriented tools. Group by intent. One `manage_subscription` handling create, update, cancel, and status beats four siblings. For genuinely large catalogs, deferred loading (start small, fetch more on demand) improved accuracy from 49% to 74% while cutting context consumption 85%.
 
 **Trade-offs:** consolidation changes the interface for existing consumers, including humans. It's an API design decision, not a rename. If your REST API must stay wide, the MCP layer is where consolidation is cheap, because MCP tools don't have to mirror endpoints.
 
@@ -72,7 +72,7 @@ Criterion IDs reference the [Zaira Standard v0.9](https://zairalabs.ai/standard/
 
 **What good looks like:** pagination with cursor metadata (`has_more`, `next_cursor`), compact summaries, semantic identifiers, filtering. The strong end adds concise modes, a defined `outputSchema`, and response sizes bounded by default.
 
-**How to get there:** context overflow is the top measured failure mode for agents on real tasks, accounting for 63% of failures in one benchmark, and one MCP server in the wild averaged 557K tokens per response. Paginate by default: first page plus cursor, never the whole dataset. Add filtering parameters so agents can ask narrower questions. Offer a concise mode returning computed summaries instead of raw records. The extreme version of that pattern cut 1.17M tokens to about 1K.
+**How to get there:** context overflow is the most common measured failure mode for agents on real tasks, accounting for 35.6% of Claude Sonnet 4 failures on SWE-bench Pro, and one MCP server in the wild averaged 557K tokens per response. Paginate by default: first page plus cursor, never the whole dataset. Add filtering parameters so agents can ask narrower questions. Offer a concise mode returning computed summaries instead of raw records. The extreme version of that pattern cut 1.17M tokens to about 1K.
 
 **Trade-offs:** default pagination is a behavior change for existing consumers expecting full lists. Version it, or make bounded behavior the default only for new interface versions.
 
@@ -226,7 +226,7 @@ Criterion IDs reference the [Zaira Standard v0.9](https://zairalabs.ai/standard/
 
 **What good looks like:** minimal description surface, structured outputs with clear field boundaries, response size limits. The strong end documents explicit mitigations and separates untrusted content from control flow.
 
-**How to get there:** the attack shape, demonstrated at an 84% success rate against major coding agents, is this: untrusted content flows through your tool's output into an agent's context and gets interpreted as instructions. Defenses on your side: keep tool descriptions concise and self-contained, with no narrative and no references to other tools an attacker could exploit. Structure outputs as JSON with clear field boundaries so data can't masquerade as instructions. Bound response sizes. Where your tool relays third-party content (search results, user records, emails), put it in clearly marked data fields and say in the description that its content is untrusted.
+**How to get there:** the attack shape, demonstrated at high success rates against major coding agents, is this: untrusted content flows through your tool's output into an agent's context and gets interpreted as instructions. Defenses on your side: keep tool descriptions concise and self-contained, with no narrative and no references to other tools an attacker could exploit. Structure outputs as JSON with clear field boundaries so data can't masquerade as instructions. Bound response sizes. Where your tool relays third-party content (search results, user records, emails), put it in clearly marked data fields and say in the description that its content is untrusted.
 
 **Trade-offs:** you cannot fix the consuming agent's prompt hygiene. The criterion measures your side of the boundary: not amplifying, not becoming the vector.
 

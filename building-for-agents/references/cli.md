@@ -2,7 +2,7 @@
 
 **Trigger:** the tool has a command-line interface.
 
-Coding agents live in the shell. They install, build, test, deploy, and operate through CLI commands constantly. They are also measurably worse at CLIs than at APIs (the best agent in the largest CLI benchmark to date resolved only 78.4% of tasks), and most of the gap comes from design choices that assume a human is watching the terminal: prompts, pagers, colored table output, platform-specific behavior.
+Coding agents live in the shell. They install, build, test, deploy, and operate through CLI commands constantly. They are also measurably worse at CLIs than at APIs (in Terminal-Bench, the largest evaluation of agent CLI usage to date, the best configuration in the benchmark paper resolved only 62.9% of tasks), and most of the gap comes from design choices that assume a human is watching the terminal: prompts, pagers, colored table output, platform-specific behavior.
 
 Criterion IDs reference the [Zaira Standard v0.9](https://zairalabs.ai/standard/v0.9).
 
