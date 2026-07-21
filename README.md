@@ -17,6 +17,16 @@ others).
   Zaira scores or designations; its findings are qualitative (met / gap /
   at-risk).
 
+## Install
+
+Claude Code shown; any agent that supports the Agent Skills format works the same way:
+
+    git clone https://github.com/ZairaLabs/Skills
+    cp -r Skills/building-for-agents ~/.claude/skills/
+
+Then, in your tool's repo, ask your agent to review the tool for agent-readiness gaps.
+The [skill README](./building-for-agents/README.md) has details.
+
 ## License
 
 Each skill directory carries its own license; `building-for-agents` is
