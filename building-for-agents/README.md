@@ -6,6 +6,19 @@ The skill works with any agent that supports the Agent Skills format (Claude Cod
 
 **What it does not do:** produce Zaira scores, percentages, or designations. Its gap findings are qualitative (met / gap / at-risk). Formal evaluation against the Zaira Standard is a separate, calibrated process. See [zairalabs.ai](https://zairalabs.ai).
 
+## Install
+
+Clone the repo and copy the skill into your agent's skills directory. For Claude Code:
+
+    git clone https://github.com/ZairaLabs/Skills
+    cp -r Skills/building-for-agents ~/.claude/skills/
+
+For a single project, put it in the repo's `.claude/skills/` instead. Other agents
+that support the Agent Skills format work the same way; check your agent's
+documentation for where skills live.
+
+Then, in your tool's repo, ask your agent to review the tool for agent-readiness gaps.
+
 ## Structure
 
 ```
