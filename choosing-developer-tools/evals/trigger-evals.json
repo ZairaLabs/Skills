@@ -1,0 +1,30 @@
+{
+  "skill": "choosing-developer-tools",
+  "purpose": "Activation check: the skill should load for real tool choices and lifecycle questions, and stay quiet for defaults, version bumps, and CVE patching.",
+  "should_trigger": [
+    "I need a managed Postgres for this side project, ideally with a free tier. What should I use?",
+    "Set up auth for this Next.js app. Clerk, Auth0, or something else?",
+    "Add transactional email to the signup flow.",
+    "We need a vector database for RAG. Can we self-host it?",
+    "Is PlanetScale still free?",
+    "Is this library still maintained? The last release looks old.",
+    "What replaced the request package?",
+    "Should we switch from Jest to Vitest?",
+    "Pick a queue for background jobs on Cloudflare Workers.",
+    "Does Neon have an MCP server our agent can use?",
+    "Which error-monitoring service has a free tier and is SOC 2 compliant?",
+    "Did MediatR change its license? Can we still use it commercially?"
+  ],
+  "should_not_trigger": [
+    "Add a UUID to each record.",
+    "Bump lodash to the latest version.",
+    "Fix the Dependabot alert on axios.",
+    "Import json and parse this file.",
+    "Write a unit test for the parser.",
+    "Rename this React component.",
+    "Run npm install.",
+    "Refactor this function to use async/await.",
+    "We already use Postgres on RDS; add an index to the users table.",
+    "Format this file with Prettier."
+  ]
+}
