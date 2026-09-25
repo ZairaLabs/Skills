@@ -1,0 +1,36 @@
+{
+  "name": "zaira-labs",
+  "owner": {
+    "name": "Zaira Labs"
+  },
+  "metadata": {
+    "description": "Agent Skills from Zaira Labs: choose developer tools with current, verified facts, and make developer tools agent-ready.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "choosing-developer-tools",
+      "description": "Checks the Zaira Guide before your agent chooses, compares, or adopts a developer tool or hosted service, then runs a lifecycle check on the tool it picks. Connects the Guide's MCP server (no account or key).",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./choosing-developer-tools"
+      ],
+      "mcpServers": {
+        "zaira-guide": {
+          "type": "http",
+          "url": "https://zairalabs.ai/guide/mcp"
+        }
+      }
+    },
+    {
+      "name": "building-for-agents",
+      "description": "Makes a developer tool agent-ready, grounded in the Zaira Standard v0.9.",
+      "source": "./",
+      "strict": false,
+      "skills": [
+        "./building-for-agents"
+      ]
+    }
+  ]
+}
